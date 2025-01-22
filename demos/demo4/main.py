@@ -1,16 +1,16 @@
 import typing
 
+import maliang
+import maliang.animation.animations as animations
+import maliang.animation.controllers as controllers
+import maliang.core.configs as configs
+import maliang.mpl as mpl
+import maliang.theme as theme
+import maliang.toolbox as toolbox
 import matplotlib.animation as animation
 import matplotlib.figure as figure
 import matplotlib.pyplot as pyplot
 import numpy
-import tkintertools as tkt
-import tkintertools.animation.animations as animations
-import tkintertools.animation.controllers as controllers
-import tkintertools.core.configs as configs
-import tkintertools.mpl as mpl
-import tkintertools.theme as theme
-import tkintertools.toolbox as toolbox
 
 if toolbox.load_font("./assets/fonts/LXGWWenKai-Regular.ttf"):
     configs.Font.family = "LXGW WenKai"
@@ -41,9 +41,9 @@ ax.set_title("3D")
 
 ax.set_yticks(yticks)
 
-root = tkt.Tk((960, 720), title="Matplotlib Test - 3D Plot")
+root = maliang.Tk((960, 720), title="Matplotlib Test - 3D Plot")
 root.center()
-canvas = tkt.Canvas(root, auto_zoom=True)
+canvas = maliang.Canvas(root, auto_zoom=True)
 canvas.place(width=960, height=720)
 figure_canvas = mpl.FigureCanvas(canvas, fig)
 toolbar = mpl.FigureToolbar(canvas, figure_canvas)
@@ -67,9 +67,9 @@ ax.set(xlabel='time (s)', ylabel='voltage (mV)',
 ax.grid()
 ax.legend(["y=sin(x)"])
 
-root = tkt.Tk((960, 720), title="Matplotlib Test - Normal Plot")
+root = maliang.Tk((960, 720), title="Matplotlib Test - Normal Plot")
 root.center()
-canvas = tkt.Canvas(root, auto_zoom=True)
+canvas = maliang.Canvas(root, auto_zoom=True)
 canvas.place(width=960, height=720)
 figure_canvas = mpl.FigureCanvas(canvas, fig)
 toolbar = mpl.FigureToolbar(canvas, figure_canvas)
@@ -84,9 +84,9 @@ NOTE: This example is experimental!
 TIPS: You can choose two different backends for the animation below
 """
 
-ANIMATION_BACKEND: typing.Literal["mpl", "tkt"] = "tkt"
+ANIMATION_BACKEND: typing.Literal["mpl", "maliang"] = "maliang"
 
-fig = figure.Figure() if ANIMATION_BACKEND == "tkt" else pyplot.figure()
+fig = figure.Figure() if ANIMATION_BACKEND == "maliang" else pyplot.figure()
 ax = fig.add_subplot()
 ax.grid()
 ax.set(xlabel='x', ylabel='y', title='Animated line plot')
@@ -103,16 +103,16 @@ def animate(i):
 ani = animation.FuncAnimation(
     fig, animate, interval=1, blit=True, save_count=50)
 
-root = tkt.Tk((960, 720), title="Matplotlib Test - Normal Plot")
+root = maliang.Tk((960, 720), title="Matplotlib Test - Normal Plot")
 root.center()
-canvas = tkt.Canvas(root, auto_zoom=True)
+canvas = maliang.Canvas(root, auto_zoom=True)
 canvas.place(width=960, height=720)
 figure_canvas = mpl.FigureCanvas(canvas, fig)
 toolbar = mpl.FigureToolbar(canvas, figure_canvas)
 figure_canvas.pack(side="top", fill="both", expand=True)
 
 
-if ANIMATION_BACKEND == "tkt":
+if ANIMATION_BACKEND == "maliang":
     animations.Animation(1000, lambda _: ani._step(),
                          controller=controllers.linear, repeat=-1).start()
 else:

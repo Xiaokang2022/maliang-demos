@@ -1,9 +1,9 @@
 import random
 
-import tkintertools as tkt
-from tkintertools import animation, theme, toolbox
-from tkintertools.core import configs, virtual
-from tkintertools.standard import shapes, styles
+import maliang
+from maliang import animation, theme, toolbox
+from maliang.core import configs, virtual
+from maliang.standard import shapes, styles
 
 if toolbox.load_font("assets/fonts/LXGWWenKai-Regular.ttf"):
     configs.Font.family = "LXGW WenKai"
@@ -42,7 +42,7 @@ class MyWidget(virtual.Widget):
 
     def __init__(
         self,
-        master: tkt.Canvas,
+        master: maliang.Canvas,
         position: tuple[int, int] = (0, 0),
         size: tuple[int, int] | None = None,
         *,
@@ -55,37 +55,37 @@ class MyWidget(virtual.Widget):
             shapes.RoundedRectangle(self, radius=16)
 
 
-tk = tkt.Tk(title="Login Window")
-cv = tkt.Canvas(auto_zoom=True, free_anchor=True, keep_ratio="max")
+tk = maliang.Tk(title="Login Window")
+cv = maliang.Canvas(auto_zoom=True, free_anchor=True, keep_ratio="max")
 cv.place(width=1280, height=720, x=640, y=360, anchor="center")
 
-img = tkt.Image(cv, (0, 0), image=tkt.PhotoImage(
+img = maliang.Image(cv, (0, 0), image=maliang.PhotoImage(
     file=f"./assets/images/{theme.get_color_mode()}.png"))
 
-theme.register_event(lambda theme: img.set(tkt.PhotoImage(
+theme.register_event(lambda theme: img.set(maliang.PhotoImage(
     file="./assets/images/%s.png" % theme)))
 
 
 login_widgets = [
     MyWidget(cv, (450, 70), (400, 560)),
-    tkt.Switch(cv, (330+440, 20+70), default=theme.get_color_mode() == "dark",
-               command=lambda flag: theme.set_color_mode("dark" if flag else "light")),
-    tkt.Text(cv, (200+450, 80+70), text="Login",
-             fontsize=48, weight="bold", anchor="center"),
-    tkt.Text(cv, (30+450, 170+70), anchor="w",
-             text="Account", fontsize=24),
-    tkt.InputBox(cv, (25+450, 190+70), (350, 50),
-                 placeholder="Please enter your account"),
-    tkt.Text(cv, (30+450, 280+70), anchor="w",
-             text="Password", fontsize=24),
-    tkt.InputBox(cv, (25+450, 300+70), (350, 50),
-                 show="●", placeholder="Please enter your password"),
-    tkt.Button(cv, (25+450, 380+70), (350, 55),
-               text="Login", command=lambda: alert("Login Success!")),
-    tkt.Text(cv, (135+450, 470+70),
-             text="Do not have an account?", fontsize=18, anchor="center"),
-    tkt.UnderlineButton(cv, (340+450, 470+70), anchor="center",
-                        text="Sign up", fontsize=18, command=move_right)
+    maliang.Switch(cv, (330+440, 20+70), default=theme.get_color_mode() == "dark",
+                   command=lambda flag: theme.set_color_mode("dark" if flag else "light")),
+    maliang.Text(cv, (200+450, 80+70), text="Login",
+                 fontsize=48, weight="bold", anchor="center"),
+    maliang.Text(cv, (30+450, 170+70), anchor="w",
+                 text="Account", fontsize=24),
+    maliang.InputBox(cv, (25+450, 190+70), (350, 50),
+                     placeholder="Please enter your account"),
+    maliang.Text(cv, (30+450, 280+70), anchor="w",
+                 text="Password", fontsize=24),
+    maliang.InputBox(cv, (25+450, 300+70), (350, 50),
+                     show="●", placeholder="Please enter your password"),
+    maliang.Button(cv, (25+450, 380+70), (350, 55),
+                   text="Login", command=lambda: alert("Login Success!")),
+    maliang.Text(cv, (135+450, 470+70),
+                 text="Do not have an account?", fontsize=18, anchor="center"),
+    maliang.UnderlineButton(cv, (340+450, 470+70), anchor="center",
+                            text="Sign up", fontsize=18, command=move_right)
 ]
 login_widgets[4].style.set(bg_bar=(..., ..., "deepskyblue"))
 login_widgets[6].style.set(bg_bar=(..., ..., "deepskyblue"))
@@ -93,27 +93,27 @@ login_widgets[-3].style.set(fg=("deepskyblue", "black"), bg=("#00000000", "deeps
 
 signup_widgets = [
     MyWidget(cv, (450-900, 70), (400, 560)),
-    tkt.Text(cv, (200+450-900, 80+70),
-             text="Sign up", fontsize=48, weight="bold", anchor="center"),
-    tkt.Text(cv, (30+450-900, 170+70),
-             anchor="w", text="Account", fontsize=24),
-    tkt.InputBox(cv, (25+450-900, 190+70), (350, 50),
-                 placeholder="Please enter your account"),
-    tkt.Text(cv, (30+450-900, 280+70), anchor="w",
-             text="Password", fontsize=24),
-    tkt.InputBox(cv, (25+450-900, 300+70), (350, 50),
-                 show="●", placeholder="Please enter your password"),
-    tkt.Button(cv, (25+450-900, 380+70), (350, 55),
-               text="Sign Up", command=lambda: alert("Sign Up Success!")),
-    tkt.Text(cv, (135+450-900, 470+70),
-             text="Already have an account?", fontsize=18, anchor="center"),
-    tkt.UnderlineButton(cv, (350+450-900, 470+70), anchor="center",
-                        text="Login", fontsize=18, command=move_left)
+    maliang.Text(cv, (200+450-900, 80+70),
+                 text="Sign up", fontsize=48, weight="bold", anchor="center"),
+    maliang.Text(cv, (30+450-900, 170+70),
+                 anchor="w", text="Account", fontsize=24),
+    maliang.InputBox(cv, (25+450-900, 190+70), (350, 50),
+                     placeholder="Please enter your account"),
+    maliang.Text(cv, (30+450-900, 280+70), anchor="w",
+                 text="Password", fontsize=24),
+    maliang.InputBox(cv, (25+450-900, 300+70), (350, 50),
+                     show="●", placeholder="Please enter your password"),
+    maliang.Button(cv, (25+450-900, 380+70), (350, 55),
+                   text="Sign Up", command=lambda: alert("Sign Up Success!")),
+    maliang.Text(cv, (135+450-900, 470+70),
+                 text="Already have an account?", fontsize=18, anchor="center"),
+    maliang.UnderlineButton(cv, (350+450-900, 470+70), anchor="center",
+                            text="Login", fontsize=18, command=move_left)
 ]
 signup_widgets[3].style.set(bg_bar=(..., ..., "#2CDE85"))
 signup_widgets[5].style.set(bg_bar=(..., ..., "#2CDE85"))
 signup_widgets[-3].style.set(fg=("#2CDB83", "black"), bg=("#00000000", "#2CDE85"), ol=("#2CDB83", "#2CDE85"))
 
-hint = tkt.Label(cv, (960, 730), (300, 100))
+hint = maliang.Label(cv, (960, 730), (300, 100))
 
 tk.mainloop()

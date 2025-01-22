@@ -1,10 +1,10 @@
 import time
 
-import tkintertools as tkt
-import tkintertools.theme as theme
-import tkintertools.three as three
+import maliang
+import maliang.theme as theme
+import maliang.three as three
 
-root = tkt.Tk(title="3D Performance Test - Demo6")
+root = maliang.Tk(title="3D Performance Test - Demo6")
 
 space = three.Space(root, auto_zoom=True, free_anchor=True,
                     keep_ratio="min", highlightthickness=0)

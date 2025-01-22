@@ -3,17 +3,17 @@ import threading
 import time
 import tkinter.filedialog as filedialog
 
+import maliang
+import maliang.core.configs as configs
+import maliang.mpl as mpl
+import maliang.standard.dialogs as dialogs
+import maliang.theme as theme
+import maliang.toolbox as toolbox
 import matplotlib.figure as figure
 import matplotlib.pyplot as pyplot
 import numpy
 import PIL.Image as Image
 import PIL.ImageTk as ImageTk
-import tkintertools as tkt
-import tkintertools.core.configs as configs
-import tkintertools.mpl as mpl
-import tkintertools.standard.dialogs as dialogs
-import tkintertools.theme as theme
-import tkintertools.toolbox as toolbox
 
 
 def get_offset(image1: Image.Image, image2: Image.Image, side: int) -> list[list[tuple[int, int]]]:
@@ -212,7 +212,7 @@ def show() -> None:
     clear()
 
     try:
-        figure_canvas = tkt.Canvas(base_canvas, auto_zoom=True)
+        figure_canvas = maliang.Canvas(base_canvas, auto_zoom=True)
         x, y = root.size
         image = ImageTk.PhotoImage(Image.open(FILE1).crop(AREA))
         figure_canvas.create_image(x//2, y//2-60, image=image)
@@ -239,15 +239,15 @@ AREA: tuple[int, int, int, int] = 400, 800, 2000, 1600
 FILE1: str = ""  # 图一
 FILE2: str = ""  # 图二
 
-root = tkt.Tk((1600, 900), title="Matplotlib Project - PIV 图像分析")
+root = maliang.Tk((1600, 900), title="Matplotlib Project - PIV 图像分析")
 root.minsize(1600, 900)
 root.center()
-base_canvas = tkt.Canvas(root, auto_zoom=True)
+base_canvas = maliang.Canvas(root, auto_zoom=True)
 base_canvas.place(width=1600, height=900)
 
 fig = figure.Figure()
 
-canvas = tkt.Canvas(base_canvas, height=120)
+canvas = maliang.Canvas(base_canvas, height=120)
 figure_canvas = mpl.FigureCanvas(base_canvas, fig)
 toolbar = mpl.FigureToolbar(root, figure_canvas, pack_toolbar=False)
 
@@ -255,32 +255,32 @@ toolbar.pack(fill="x")
 canvas.pack(side="bottom", fill="x")
 figure_canvas.pack(expand=True, fill="both")
 
-tkt.Text(canvas, (20, 10), text="滑动窗口边长", anchor="nw")
-SIDE = tkt.InputBox(canvas, (20, 50), (200, 50))
+maliang.Text(canvas, (20, 10), text="滑动窗口边长", anchor="nw")
+SIDE = maliang.InputBox(canvas, (20, 50), (200, 50))
 SIDE.set("24")
 
-tkt.Text(canvas, (260, 10), text="滑动窗口索引", anchor="nw")
-INDEX = tkt.InputBox(canvas, (260, 50), (200, 50))
+maliang.Text(canvas, (260, 10), text="滑动窗口索引", anchor="nw")
+INDEX = maliang.InputBox(canvas, (260, 50), (200, 50))
 INDEX.set("(0, 0)")
 
-pb = tkt.ProgressBar(canvas, (500, 15))
-c = tkt.Button(canvas, (500, 50), (120, 50), text="计算", command=lambda: threading.Thread(
+pb = maliang.ProgressBar(canvas, (500, 15))
+c = maliang.Button(canvas, (500, 50), (120, 50), text="计算", command=lambda: threading.Thread(
     target=caculate, daemon=True).start())
 
-tkt.Button(canvas, (640, 50), (120, 50), text="显示", command=show)
-tkt.Button(canvas, (780, 50), (120, 50), text="打开", command=open_images)
+maliang.Button(canvas, (640, 50), (120, 50), text="显示", command=show)
+maliang.Button(canvas, (780, 50), (120, 50), text="打开", command=open_images)
 
-tkt.Text(canvas, (990, 30), text="明亮模式", anchor="center")
-tkt.Text(canvas, (1170, 30), text="黑暗模式", anchor="center")
-tkt.Text(canvas, (990, 80), text="速度矢量", anchor="center")
-tkt.Text(canvas, (1170, 80), text="相关系数", anchor="center")
+maliang.Text(canvas, (990, 30), text="明亮模式", anchor="center")
+maliang.Text(canvas, (1170, 30), text="黑暗模式", anchor="center")
+maliang.Text(canvas, (990, 80), text="速度矢量", anchor="center")
+maliang.Text(canvas, (1170, 80), text="相关系数", anchor="center")
 
-tkt.Switch(canvas, (1050, 15), 60, default=theme.get_color_mode() == "dark",
-           command=lambda b: theme.set_color_mode("dark" if b else "light"))
-tkt.Switch(canvas, (1050, 65), 60, command=set_calc_mode)
+maliang.Switch(canvas, (1050, 15), 60, default=theme.get_color_mode() == "dark",
+               command=lambda b: theme.set_color_mode("dark" if b else "light"))
+maliang.Switch(canvas, (1050, 65), 60, command=set_calc_mode)
 
-a = tkt.Text(canvas, (1270, 20),
-             text="最佳结果: (-, -), -1.00", anchor="nw")
-b = tkt.Text(canvas, (1270, 60), text="计算耗时: 0.000 s", anchor="nw")
+a = maliang.Text(canvas, (1270, 20),
+                 text="最佳结果: (-, -), -1.00", anchor="nw")
+b = maliang.Text(canvas, (1270, 60), text="计算耗时: 0.000 s", anchor="nw")
 
 root.mainloop()

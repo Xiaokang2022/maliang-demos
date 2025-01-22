@@ -2,18 +2,18 @@ import itertools
 import math
 import statistics
 
+import maliang
+import maliang.animation.animations as animations
+import maliang.animation.controllers as controllers
+import maliang.core.configs as configs
+import maliang.media as media
+import maliang.mpl as mpl
+import maliang.theme as theme
+import maliang.three as three
+import maliang.toolbox as toolbox
 import matplotlib.animation as animation
 import matplotlib.figure as figure
 import numpy
-import tkintertools as tkt
-import tkintertools.animation.animations as animations
-import tkintertools.animation.controllers as controllers
-import tkintertools.core.configs as configs
-import tkintertools.media as media
-import tkintertools.mpl as mpl
-import tkintertools.theme as theme
-import tkintertools.three as three
-import tkintertools.toolbox as toolbox
 
 # Optional operations #
 
@@ -27,7 +27,7 @@ mpl.set_mpl_default_theme(theme.get_color_mode(), apply_font=True)
 # Optional operations #
 
 
-# tkintertools-mpl-1 #
+# maliang-mpl-1 #
 fig1 = figure.Figure()
 ax = fig1.add_subplot()
 ax.grid()
@@ -44,10 +44,10 @@ def animate(i):
 
 ani = animation.FuncAnimation(
     fig1, animate, interval=1, blit=True, save_count=50)
-# tkintertools-mpl #
+# maliang-mpl #
 
 
-# tkintertools-mpl-2 #
+# maliang-mpl-2 #
 fig2 = figure.Figure()
 ax2 = fig2.add_subplot(projection='3d')
 
@@ -67,17 +67,17 @@ ax2.set_zlabel('Z')
 ax2.set_title("3D plotting with interoperability")
 
 ax2.set_yticks(yticks)
-# tkintertools-mpl #
+# maliang-mpl #
 
 
-root = tkt.Tk((1920, 1080), title="Extension Test")
+root = maliang.Tk((1920, 1080), title="Extension Test")
 
 # Optional operations #
 # theme.customize_window(root, boarder_type="rectangular")
 # Optional operations #
 
 root.center()
-cv = tkt.Canvas(root, keep_ratio="min", free_anchor=True, auto_zoom=True)
+cv = maliang.Canvas(root, keep_ratio="min", free_anchor=True, auto_zoom=True)
 cv.place(width=1920, height=1080, x=960, y=540, anchor="center")
 
 cv_mpl_1 = mpl.FigureCanvas(cv, fig1)
@@ -90,15 +90,15 @@ cv_mpl_2.place(width=960, height=540, x=960, y=540)
 
 animations.Animation(1000, lambda _: ani._step(), controller=controllers.linear, repeat=-1).start()
 
-# tkintertools-media #
+# maliang-media #
 cv_media = media.VideoCanvas(
     cv, keep_ratio="min", free_anchor=True, controls=True)
 cv_media.place(width=960, height=540, x=960)
 cv_media.open("./assets/videos/Bad Apple.mp4")
-# tkintertools-media #
+# maliang-media #
 
 
-# tkintertools-3d #
+# maliang-3d #
 space = three.Space(cv, free_anchor=True, auto_zoom=True, highlightthickness=0,
                     keep_ratio="min")
 space.configure(bg="black" if theme.get_color_mode() == "dark" else "white")
@@ -150,9 +150,9 @@ an = animations.Animation(2000, _callback, controller=controllers.linear,
                           fps=60, repeat=-1, derivation=True)
 
 
-tkt.Switch(space, (10, 10), command=lambda flag: an.start()
-           if flag else an.stop())
-# tkintertools-3d #
+maliang.Switch(space, (10, 10), command=lambda flag: an.start()
+               if flag else an.stop())
+# maliang-3d #
 
 
 root.mainloop()

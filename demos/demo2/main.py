@@ -2,16 +2,16 @@ import math
 import tkinter
 import typing
 
-import tkintertools as tkt
-import tkintertools.animation as animation
-import tkintertools.core.configs as configs
-import tkintertools.core.virtual as virtual
-import tkintertools.standard.dialogs as dialogs
-import tkintertools.standard.features as features
-import tkintertools.standard.shapes as shapes
-import tkintertools.standard.texts as texts
-import tkintertools.theme as theme
-import tkintertools.toolbox as toolbox
+import maliang
+import maliang.animation as animation
+import maliang.core.configs as configs
+import maliang.core.virtual as virtual
+import maliang.standard.dialogs as dialogs
+import maliang.standard.features as features
+import maliang.standard.shapes as shapes
+import maliang.standard.texts as texts
+import maliang.theme as theme
+import maliang.toolbox as toolbox
 
 if toolbox.load_font("./assets/fonts/LXGWWenKai-Regular.ttf"):  # 加载指定字体文件
     configs.Font.family = "LXGW WenKai"  # 指定全局字体
@@ -33,7 +33,7 @@ class Piece(virtual.Widget):
 
     def __init__(
         self,
-        master: tkt.Canvas,
+        master: maliang.Canvas,
         position: tuple[int, int],
         color: typing.Literal["white", "black"],
         text: str,
@@ -246,10 +246,10 @@ cursor_index = 2, 2  # 游标位置
 selected_piece: Piece | None = None  # 当前被选中的棋子
 player: typing.Literal["white", "black"] = "white"  # 当前玩家
 
-root = tkt.Tk((600, 600), title="Simple Game")  # 根窗口
+root = maliang.Tk((600, 600), title="Simple Game")  # 根窗口
 root.center()  # 窗口屏幕居中
-canvas = tkt.Canvas(auto_zoom=True, keep_ratio="min", zoom_all_items=True,
-                    free_anchor=True)  # 主画布
+canvas = maliang.Canvas(auto_zoom=True, keep_ratio="min", zoom_all_items=True,
+                        free_anchor=True)  # 主画布
 canvas.place(width=600, height=600, x=300, y=300, anchor="center")
 canvas.bind("<Motion>", move_cursor, add="+")  # 绑定鼠标移动事件
 canvas.bind("<Button-1>", click, add="+")  # 绑定鼠标左键点击事件

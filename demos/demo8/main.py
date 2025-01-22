@@ -1,10 +1,10 @@
 import math
 
-import tkintertools as tkt
-import tkintertools.theme as theme
-import tkintertools.three as three
+import maliang
+import maliang.theme as theme
+import maliang.three as three
 
-root = tkt.Tk((1600, 900), title="3D Test - Demo8")
+root = maliang.Tk((1600, 900), title="3D Test - Demo8")
 space = three.Space(root, keep_ratio="min", free_anchor=True, highlightthickness=0)
 space["bg"] = "black" if theme.get_color_mode() == "dark" else "white"
 space.place(width=1600, height=900, x=800, y=450, anchor="center")

@@ -2,12 +2,12 @@ import itertools
 import math
 import statistics
 
-import tkintertools as tkt
-import tkintertools.animation as animation
-import tkintertools.theme as theme
-import tkintertools.three as three
+import maliang
+import maliang.animation as animation
+import maliang.theme as theme
+import maliang.three as three
 
-root = tkt.Tk(title="3D Functional Test - Demo7")
+root = maliang.Tk(title="3D Functional Test - Demo7")
 
 space = three.Space(root, free_anchor=True, auto_zoom=True, highlightthickness=0,
                     keep_ratio="min")
@@ -60,7 +60,7 @@ an = animation.Animation(2000, _callback, controller=animation.linear,
                          fps=60, repeat=-1, derivation=True)
 
 
-tkt.Switch(space, (10, 10), command=lambda flag: an.start()
-           if flag else an.stop())
+maliang.Switch(space, (10, 10), command=lambda flag: an.start()
+               if flag else an.stop())
 
 root.mainloop()

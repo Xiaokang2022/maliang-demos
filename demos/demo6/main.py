@@ -38,7 +38,7 @@ def _callback() -> None:
     count += 1
     t = time.time()
     for item in space.geometries:
-        item.rotate(dy=-0.01)
+        item.rotate(dx=0.01, dy=-0.01, dz=0.01)
         item.update()
     space.space_sort()
     fps += 1/(time.time() - t)

@@ -47,4 +47,5 @@ def _callback() -> None:
 
 
 _callback()
+root.after(10_000, root.destroy)
 root.mainloop()
